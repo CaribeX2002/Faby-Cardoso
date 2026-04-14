@@ -208,7 +208,7 @@ Exemplo: "O produto que você procura e muitos outros materiais estão disponív
     let replyText = "";
     try {
       const aiResponse = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3-flash-preview",
         contents: contents,
         config: {
           systemInstruction: systemInstruction,
@@ -224,8 +224,11 @@ Exemplo: "O produto que você procura e muitos outros materiais estão disponív
         fullError: JSON.stringify(aiError)
       });
       
-      if (aiError?.status === 429 || aiError?.message?.includes("429")) {
-        replyText = "Desculpe, estou recebendo muitas mensagens no momento. Pode aguardar alguns segundos e tentar novamente? ⏳";
+      if (
+        aiError?.status === 429 || aiError?.message?.includes("429") ||
+        aiError?.status === 503 || aiError?.message?.includes("503") || aiError?.message?.includes("high demand")
+      ) {
+        replyText = "Desculpe, estou um pouco sobrecarregada no momento devido a muitos acessos. Pode aguardar alguns segundinhos e tentar novamente? ⏳";
       } else {
         replyText = `Desculpe, ocorreu um erro no meu sistema. (Erro: ${aiError.message || 'Desconhecido'})`;
       }
