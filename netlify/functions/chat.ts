@@ -217,11 +217,17 @@ Exemplo: "O produto que você procura e muitos outros materiais estão disponív
       });
       replyText = aiResponse.text || "Desculpe, não consegui processar a resposta.";
     } catch (aiError: any) {
-      console.error("Gemini API Error:", aiError);
+      console.error("Gemini API Error Details:", {
+        message: aiError.message,
+        status: aiError.status,
+        stack: aiError.stack,
+        fullError: JSON.stringify(aiError)
+      });
+      
       if (aiError?.status === 429 || aiError?.message?.includes("429")) {
         replyText = "Desculpe, estou recebendo muitas mensagens no momento. Pode aguardar alguns segundos e tentar novamente? ⏳";
       } else {
-        replyText = "Desculpe, ocorreu um erro no meu sistema. Tente novamente mais tarde.";
+        replyText = `Desculpe, ocorreu um erro no meu sistema. (Erro: ${aiError.message || 'Desconhecido'})`;
       }
     }
 
