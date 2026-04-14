@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, Facebook, Instagram, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
@@ -53,12 +53,40 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-10 text-center">
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center gap-6 mb-8">
+            <a 
+              href="https://go.hotmart.com/M105111783P?ap=f666" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-[#1877F2] transition-colors"
+              aria-label="Facebook"
+            >
+              <Facebook className="w-8 h-8" />
+            </a>
+            <a 
+              href="https://go.hotmart.com/M105111783P?ap=36b9" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-[#E4405F] transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram className="w-8 h-8" />
+            </a>
+            <a 
+              href="https://go.hotmart.com/M105111783P?ap=9f1c" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-[#FF0000] transition-colors"
+              aria-label="YouTube"
+            >
+              <Youtube className="w-8 h-8" />
+            </a>
             <a 
               href="https://wa.me/5581995194622?text=Olá!%20Vim%20através%20do%20site." 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-500 hover:text-[#25D366] transition-colors"
+              aria-label="WhatsApp"
             >
               <MessageCircle className="w-8 h-8" />
             </a>
