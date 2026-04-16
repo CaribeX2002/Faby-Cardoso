@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle, Facebook, Instagram, Youtube } from 'lucide-react';
+import { MessageCircle, Facebook, Instagram, Youtube, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
@@ -20,16 +20,14 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 text-center border-t border-white/10 pt-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 text-center md:text-left border-t border-white/10 pt-16">
           <div>
             <h4 className="text-secondary font-bold uppercase tracking-widest text-xs mb-6">Dicas & Blog</h4>
             <ul className="space-y-4">
-              <li><Link to="/estrategias-lucro" className="text-gray-400 hover:text-white text-sm transition-colors">5 Segredos para Lucrar Mais</Link></li>
-              <li><Link to="/precificacao" className="text-gray-400 hover:text-white text-sm transition-colors">Guia de Precificação Profissional</Link></li>
-              <li><Link to="/dicas-decoracao" className="text-gray-400 hover:text-white text-sm transition-colors">Dicas de Unhas Decoradas</Link></li>
-              <li><Link to="/cutilagem-e-decoracao" className="text-gray-400 hover:text-white text-sm transition-colors">Cutilagem e Durabilidade</Link></li>
-              <li><Link to="/materiais-iniciante" className="text-gray-400 hover:text-white text-sm transition-colors">Materiais para Iniciantes</Link></li>
-              <li><Link to="/galeria-inspiracao" className="text-gray-400 hover:text-white text-sm transition-colors">Galeria de Inspiração (+40 Fotos)</Link></li>
+              <li><Link to="/como-ser-nail-designer" className="text-gray-400 hover:text-white text-sm transition-colors">Como ser Nail Designer</Link></li>
+              <li><Link to="/10-dicas-manicure-sucesso" className="text-gray-400 hover:text-white text-sm transition-colors">10 Dicas de Sucesso</Link></li>
+              <li><Link to="/guia-alongamento-unhas" className="text-gray-400 hover:text-white text-sm transition-colors">Guia Unha em Gel e Fibra</Link></li>
+              <li className="pt-2"><Link to="/blog" className="text-secondary hover:text-white text-sm font-bold flex items-center justify-center md:justify-start gap-1 transition-colors">Ler Mais Artigos <ArrowRight className="w-4 h-4" /></Link></li>
             </ul>
           </div>
           <div>

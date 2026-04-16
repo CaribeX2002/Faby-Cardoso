@@ -58,12 +58,18 @@ export default function Precificacao() {
           <h1 className="text-4xl md:text-5xl font-extrabold text-primary mb-8 leading-tight">
             Como Definir Preços que <span className="text-secondary">Valorizam seu Talento</span>
           </h1>
-          <p className="text-gray-500 text-lg leading-relaxed">
+          <p className="text-gray-500 text-lg leading-relaxed mb-8">
             Precificar corretamente é a base de um negócio sustentável. Aprenda a equilibrar seus custos com o valor que você entrega para se destacar no mercado de manicure.
           </p>
+          <img 
+            src="https://i.imgur.com/XaAhAk6.jpeg" 
+            alt="Como Cobrar pelo Seu Serviço" 
+            className="rounded-[2.5rem] shadow-xl w-full max-h-[400px] object-cover mb-12"
+            referrerPolicy="no-referrer"
+          />
         </motion.div>
 
-        <div className="space-y-8">
+        <div className="space-y-8 mb-16">
           {points.map((point, index) => (
             <motion.section 
               key={index}

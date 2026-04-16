@@ -44,9 +44,22 @@ export default function CutilagemDurabilidade() {
           <h1 className="text-4xl md:text-5xl font-extrabold text-primary mb-8 leading-tight">
             A Arte da <span className="text-secondary">Cutilagem Perfeita</span>: Segurança e Estética
           </h1>
-          <p className="text-gray-500 text-lg leading-relaxed">
+          <p className="text-gray-500 text-lg leading-relaxed mb-8">
             Uma manicure excepcional começa na preparação. Dominar a cutilagem é garantir o conforto da sua cliente e a base perfeita para qualquer decoração duradoura.
           </p>
+
+          <div className="relative w-full overflow-hidden rounded-[2.5rem] shadow-xl mb-12 aspect-video">
+            <iframe 
+              className="absolute top-0 left-0 w-full h-full"
+              src="https://www.youtube.com/embed/SJIS84jaAvI?si=jTet8ffDn9MNqXg0" 
+              title="YouTube video player" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerPolicy="strict-origin-when-cross-origin" 
+              allowFullScreen>
+            </iframe>
+          </div>
+
         </motion.div>
 
         <div className="space-y-8 mb-16">
