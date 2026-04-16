@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Shield, Droplets, Scissors, MousePointer2, ShoppingCart, CheckCircle2 } from 'lucide-react';
+import { SEO } from '../../components/SEO';
 
 export default function CutilagemDurabilidade() {
   const sections = [
@@ -29,6 +30,10 @@ export default function CutilagemDurabilidade() {
 
   return (
     <div className="pt-32 pb-24 bg-white">
+      <SEO 
+        title="Cutilagem Perfeita e Durabilidade | Faby Cardoso" 
+        description="Cutilagem e durabilidade andam juntas! Domine o preparo da unha para evitar que o esmalte descasque, garantindo clientes mais satisfeitos com resultados VIP." 
+      />
       <div className="container mx-auto px-4 max-w-4xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { TrendingUp, ShoppingBag, Layers, Share2, Calendar, Award } from 'lucide-react';
+import { SEO } from '../../components/SEO';
 
 export default function EstrategiasLucro() {
   const strategies = [
@@ -33,6 +34,10 @@ export default function EstrategiasLucro() {
 
   return (
     <div className="pt-32 pb-24 bg-white">
+      <SEO 
+        title="Estratégias de Lucro para Manicures | Faby Cardoso" 
+        description="Segredos para lucrar como manicure e lotar sua agenda! Descubra 5 estratégias rápidas para fidelizar clientes e turbinar sua renda hoje. Leia e aplique já!" 
+      />
       <div className="container mx-auto px-4 max-w-4xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

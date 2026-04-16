@@ -1,10 +1,15 @@
 import React from 'react';
 import { ShieldCheck, BookOpen, CheckCircle2, Award, Star, Clock, ChevronDown, Play, FileText, Gift } from 'lucide-react';
 import { motion } from 'motion/react';
+import { SEO } from '../components/SEO';
 
 export default function Home() {
   return (
     <>
+      <SEO 
+        title="Curso de Cutilagem Faby Cardoso" 
+        description="Curso de cutilagem perfeito! Aprenda as melhores técnicas com Faby Cardoso, do básico ao avançado, e alcance sua independência financeira hoje. Matricule-se!" 
+      />
       {/* Hero Section */}
       <section id="inicio" className="relative pt-40 pb-24 md:pt-56 md:pb-32 bg-primary overflow-hidden">
         <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-secondary/15 rounded-full blur-[120px] pointer-events-none"></div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Calculator, Search, Star, Box, RefreshCw, Calendar, Megaphone, CheckCircle } from 'lucide-react';
+import { SEO } from '../../components/SEO';
 
 export default function Precificacao() {
   const points = [
@@ -43,6 +44,10 @@ export default function Precificacao() {
 
   return (
     <div className="pt-32 pb-24 bg-white">
+      <SEO 
+        title="Como Cobrar pelo Seu Serviço | Faby Cardoso" 
+        description="Aprenda a precificar seu trabalho de manicure e pare de perder dinheiro! Entenda seus custos, valorize sua unha decorada e conquiste clientes que pagam mais." 
+      />
       <div className="container mx-auto px-4 max-w-4xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

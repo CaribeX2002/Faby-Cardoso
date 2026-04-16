@@ -1,10 +1,15 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Star, Award, Users, Heart } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export default function About() {
   return (
     <div className="pt-32 pb-24">
+      <SEO 
+        title="Quem é Faby Cardoso?" 
+        description="Faby Cardoso é a Maior Instrutora de Manicures do Brasil. Conheça a trajetória da especialista em cutilagem, esmaltação e mude de vida com seu método único!" 
+      />
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div 

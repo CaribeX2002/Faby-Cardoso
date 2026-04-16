@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { CheckCircle2, Play, FileText, Gift } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export default function Courses() {
   const modules = [
@@ -24,6 +25,10 @@ export default function Courses() {
 
   return (
     <div className="pt-32 pb-24 bg-gray-50">
+      <SEO 
+        title="Tudo sobre nossos conteúdos e pacotes | Faby Cardoso" 
+        description="Cursos para manicures com certificado válido! Escolha o melhor plano de cutilagem, nivel básico ao VIP. Garanta acesso vitalício, apostilas e comece já!" 
+      />
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="text-secondary font-bold uppercase tracking-widest text-sm mb-4 block">O que você vai aprender</span>
