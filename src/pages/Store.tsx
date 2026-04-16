@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShoppingCart, Star, ShieldCheck, Truck, ExternalLink, X, Plus, Minus, Trash2, AlertCircle, Heart } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 const products = [
   { id: 1, title: "Toalha Descartável Manicure Depil Skin 20x30", price: "R$ 24,00", category: "Cuidados e tratamento", badge: "Frete Grátis", link: "https://meli.la/2Bf9PUD", image1: "https://http2.mlstatic.com/D_Q_NP_961984-MLA83564724683_042025-F.webp", image2: "https://http2.mlstatic.com/D_Q_NP_940852-MLU75094865990_032024-F.webp" },
@@ -111,6 +112,10 @@ export default function Store() {
 
   return (
     <div className="pb-24 bg-gray-50 min-h-screen relative">
+      <SEO 
+        title="Loja Oficial | Faby Cardoso" 
+        description="Loja para manicures completa! Encontre materiais para cutilagem, esmaltes, kits iniciais e ferramentas profissionais com desconto especial para a área." 
+      />
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 bg-primary overflow-hidden">
         <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-secondary/15 rounded-full blur-[120px] pointer-events-none"></div>

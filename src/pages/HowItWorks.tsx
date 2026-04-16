@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Smartphone, Monitor, Clock, MessageCircle, CreditCard, Mail } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export default function HowItWorks() {
   const steps = [
@@ -28,6 +29,10 @@ export default function HowItWorks() {
 
   return (
     <div className="pt-32 pb-24">
+      <SEO 
+        title="Como Funciona o Curso? | Faby Cardoso" 
+        description="Como funciona o curso de cutilagem pela Hotmart? Entenda todo o método Faby Cardoso, veja depoimentos e descubra como assistir às aulas do zero ao avançado." 
+      />
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="text-secondary font-bold uppercase tracking-widest text-sm mb-4 block">Passo a Passo</span>

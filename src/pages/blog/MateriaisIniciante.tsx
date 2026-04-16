@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Scissors, Package, ShieldCheck, Sparkles, ShoppingCart, CheckCircle2, Briefcase } from 'lucide-react';
+import { SEO } from '../../components/SEO';
 
 export default function MateriaisIniciante() {
   const categories = [
@@ -29,6 +30,10 @@ export default function MateriaisIniciante() {
 
   return (
     <div className="pt-32 pb-24 bg-white">
+      <SEO 
+        title="Materiais para Iniciantes em Cutilagem | Faby Cardoso" 
+        description="Começando agora na profissão de manicure? Descubra a lista completa de ferramentas e materiais para iniciar seus atendimentos com baixo investimento." 
+      />
       <div className="container mx-auto px-4 max-w-4xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

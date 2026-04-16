@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Heart, Share2, Download } from 'lucide-react';
+import { SEO } from '../../components/SEO';
 
 export default function GaleriaInspiracao() {
   const imageUrls = [
@@ -43,6 +44,10 @@ export default function GaleriaInspiracao() {
 
   return (
     <div className="pt-32 pb-24 bg-gray-50">
+      <SEO 
+        title="Galeria de Inspiração de Unhas | Faby Cardoso" 
+        description="Galeria de inspiração para unhas perfeita! Veja mais de 40 fotos de unhas decoradas e cutilagem em nosso catálogo e tenha ideias criativas para suas clientes." 
+      />
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

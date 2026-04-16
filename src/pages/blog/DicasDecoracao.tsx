@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, Palette, Scissors, Brush, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { SEO } from '../../components/SEO';
 
 export default function DicasDecoracao() {
   const tips = [
@@ -33,6 +34,10 @@ export default function DicasDecoracao() {
 
   return (
     <div className="pt-32 pb-24 bg-white">
+      <SEO 
+        title="Dicas de Unhas Decoradas | Faby Cardoso" 
+        description="Dicas de unhas decoradas incríveis! Aprenda traços finos, combinações de cores e tendências que vão lotar sua agenda. Seja a melhor manicure de sua região." 
+      />
       <div className="container mx-auto px-4 max-w-4xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
