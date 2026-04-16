@@ -11,6 +11,12 @@ import DicasDecoracao from './pages/blog/DicasDecoracao';
 import CutilagemDurabilidade from './pages/blog/CutilagemDurabilidade';
 import GaleriaInspiracao from './pages/blog/GaleriaInspiracao';
 import MateriaisIniciante from './pages/blog/MateriaisIniciante';
+import DiferencaManicureNailDesigner from './pages/blog/DiferencaManicureNailDesigner';
+import ComoSerNailDesigner from './pages/blog/ComoSerNailDesigner';
+import DezDicasManicureSucesso from './pages/blog/DezDicasManicureSucesso';
+import ProdutosEssenciaisManicure from './pages/blog/ProdutosEssenciaisManicure';
+import GuiaAlongamentoUnhas from './pages/blog/GuiaAlongamentoUnhas';
+import BlogIndex from './pages/blog/BlogIndex';
 import Store from './pages/Store';
 
 // Helper component to scroll to top on route change
@@ -40,6 +46,12 @@ export default function App() {
           <Route path="/cutilagem-e-decoracao" element={<CutilagemDurabilidade />} />
           <Route path="/materiais-iniciante" element={<MateriaisIniciante />} />
           <Route path="/galeria-inspiracao" element={<GaleriaInspiracao />} />
+          <Route path="/diferenca-manicure-nail-designer" element={<DiferencaManicureNailDesigner />} />
+          <Route path="/como-ser-nail-designer" element={<ComoSerNailDesigner />} />
+          <Route path="/10-dicas-manicure-sucesso" element={<DezDicasManicureSucesso />} />
+          <Route path="/produtos-essenciais-manicure" element={<ProdutosEssenciaisManicure />} />
+          <Route path="/guia-alongamento-unhas" element={<GuiaAlongamentoUnhas />} />
+          <Route path="/blog" element={<BlogIndex />} />
           <Route path="/loja" element={<Store />} />
         </Routes>
       </Layout>

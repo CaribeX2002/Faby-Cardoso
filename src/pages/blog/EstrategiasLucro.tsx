@@ -48,12 +48,18 @@ export default function EstrategiasLucro() {
           <h1 className="text-4xl md:text-5xl font-extrabold text-primary mb-8 leading-tight">
             5 Estratégias para <span className="text-secondary">Aumentar seus Ganhos</span> e Crescer como Manicure
           </h1>
-          <p className="text-gray-500 text-lg leading-relaxed">
+          <p className="text-gray-500 text-lg leading-relaxed mb-8">
             Para faturar mais, não basta apenas trabalhar mais horas; é preciso trabalhar de forma inteligente. Confira práticas essenciais que podem transformar sua realidade financeira na profissão.
           </p>
+          <img 
+            src="https://i.imgur.com/6o68SQ8.jpeg" 
+            alt="Estratégias de Lucro para Manicures" 
+            className="rounded-[2.5rem] shadow-xl w-full max-h-[400px] object-cover mb-12"
+            referrerPolicy="no-referrer"
+          />
         </motion.div>
 
-        <div className="space-y-12">
+        <div className="space-y-12 mb-16">
           {strategies.map((strategy, index) => (
             <motion.div 
               key={index}

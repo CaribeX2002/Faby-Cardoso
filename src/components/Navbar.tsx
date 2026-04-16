@@ -22,16 +22,8 @@ export default function Navbar() {
     { name: 'O Método', path: '/#metodo' },
     { name: 'Certificado', path: '/#certificado' },
     { name: 'Planos', path: '/#cursos' },
-    { name: 'Loja Oficial', path: '/loja' },
-  ];
-
-  const seoLinks = [
-    { name: '5 Segredos para Lucrar Mais', path: '/estrategias-lucro' },
-    { name: 'Guia de Precificação', path: '/precificacao' },
-    { name: 'Dicas de Decoração', path: '/dicas-decoracao' },
-    { name: 'Cutilagem e Durabilidade', path: '/cutilagem-e-decoracao' },
-    { name: 'Materiais para Iniciantes', path: '/materiais-iniciante' },
-    { name: 'Galeria +40 Unhas', path: '/galeria-inspiracao' },
+    { name: 'Blog & Dicas', path: '/blog', isRouterLink: true },
+    { name: 'Loja Oficial', path: '/loja', isRouterLink: true },
   ];
 
   return (
@@ -51,33 +43,26 @@ export default function Navbar() {
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
-            <a
-              key={link.path}
-              href={link.path}
-              className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 h-0.5 bg-secondary w-0 group-hover:w-full transition-all duration-300"></span>
-            </a>
+            link.isRouterLink ? (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 h-0.5 bg-secondary w-0 group-hover:w-full transition-all duration-300"></span>
+              </Link>
+            ) : (
+              <a
+                key={link.path}
+                href={link.path}
+                className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 h-0.5 bg-secondary w-0 group-hover:w-full transition-all duration-300"></span>
+              </a>
+            )
           ))}
-          
-          {/* SEO Dropdown */}
-          <div className="relative group/dropdown">
-            <button className="text-sm font-medium text-gray-300 hover:text-white transition-colors flex items-center gap-1">
-              Dicas & Blog <ChevronDown className="w-4 h-4" />
-            </button>
-            <div className="absolute top-full right-0 mt-2 w-64 bg-black/95 border border-white/10 rounded-xl overflow-hidden opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 shadow-2xl">
-              {seoLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className="block px-4 py-3 text-xs text-gray-300 hover:bg-secondary hover:text-white transition-colors"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-          </div>
 
           <a 
             href="https://wa.me/5581995194622?text=Olá!%20Vim%20através%20do%20site." 
@@ -110,28 +95,26 @@ export default function Navbar() {
           >
             <div className="flex flex-col p-6 gap-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.path}
-                  href={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className="font-medium text-lg text-gray-300 hover:text-white"
-                >
-                  {link.name}
-                </a>
-              ))}
-              <div className="border-t border-white/10 pt-4 mt-2">
-                <p className="text-secondary text-xs font-bold uppercase tracking-widest mb-4">Dicas & Blog</p>
-                {seoLinks.map((link) => (
+                link.isRouterLink ? (
                   <Link
                     key={link.path}
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className="block py-2 text-gray-400 hover:text-white text-sm"
+                    className="font-medium text-lg text-gray-300 hover:text-white"
                   >
                     {link.name}
                   </Link>
-                ))}
-              </div>
+                ) : (
+                  <a
+                    key={link.path}
+                    href={link.path}
+                    onClick={() => setIsOpen(false)}
+                    className="font-medium text-lg text-gray-300 hover:text-white"
+                  >
+                    {link.name}
+                  </a>
+                )
+              ))}
               <a 
                 href="https://wa.me/5581995194622?text=Olá!%20Vim%20através%20do%20site." 
                 target="_blank" 

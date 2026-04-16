@@ -44,9 +44,15 @@ export default function MateriaisIniciante() {
           <h1 className="text-4xl md:text-5xl font-extrabold text-primary mb-8 leading-tight">
             Materiais e Ferramentas <span className="text-secondary">Essenciais</span> para Começar
           </h1>
-          <p className="text-gray-500 text-lg leading-relaxed">
+          <p className="text-gray-500 text-lg leading-relaxed mb-8">
             Está começando agora e não sabe o que comprar? Preparei uma lista completa com tudo o que você precisa para iniciar seus atendimentos com profissionalismo e segurança.
           </p>
+          <img 
+            src="https://i.imgur.com/fIhysKU.jpeg" 
+            alt="Materiais e Ferramentas Essenciais" 
+            className="rounded-[2.5rem] shadow-xl w-full max-h-[400px] object-cover mb-12"
+            referrerPolicy="no-referrer"
+          />
         </motion.div>
 
         <div className="space-y-8 mb-16">
