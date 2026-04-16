@@ -68,11 +68,13 @@ export default function ChatAssistant() {
           setDiscordChannelId(data.discordChannelId);
         }
       } else {
-        setMessages([...newMessages, { role: 'model', content: "Desculpe, tive um problema de conexão. Pode tentar novamente?" }]);
+        const errText = await response.text();
+        console.error("Server Error:", response.status, errText);
+        setMessages([...newMessages, { role: 'model', content: `Desculpe, tive um problema de conexão (Erro ${response.status}). Pode tentar novamente?` }]);
       }
     } catch (error) {
       console.error("Chat error:", error);
-      setMessages([...newMessages, { role: 'model', content: "Desculpe, ocorreu um erro. Tente novamente mais tarde." }]);
+      setMessages([...newMessages, { role: 'model', content: "Desculpe, ocorreu um erro de rede. Tente novamente mais tarde." }]);
     } finally {
       setIsLoading(false);
     }
