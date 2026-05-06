@@ -60,12 +60,14 @@ export const handler: Handler = async (event) => {
     }
 
     // 2. Get AI Response
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey || apiKey === "MY_GEMINI_API_KEY") {
+    // Utilizando a chave fornecida para corrigir o erro PERMISSION_DENIED
+    const apiKey = "AIzaSyB3X5fS10PNZ3FyKDWPsRFYfuiz6gcXQpY";
+    
+    if (!apiKey) {
       return {
         statusCode: 200,
         body: JSON.stringify({ 
-          reply: "⚠️ A chave da API do Gemini não está configurada corretamente. Por favor, adicione uma chave válida nas configurações." 
+          reply: "⚠️ A chave da API do Gemini não está configurada corretamente." 
         })
       };
     }
