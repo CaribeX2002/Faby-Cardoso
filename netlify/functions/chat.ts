@@ -209,7 +209,7 @@ Exemplo: "O produto que você procura e muitos outros materiais estão disponív
     let replyText = "";
     try {
       const aiResponse = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: "gemini-2.5-flash",
         contents: contents,
         config: {
           systemInstruction: systemInstruction,
