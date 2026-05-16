@@ -10,9 +10,10 @@ export const handler: Handler = async (event) => {
     const body = event.body ? JSON.parse(event.body) : {};
     const { message, history, customerName, discordChannelId } = body;
     
-    const botToken = process.env.DISCORD_BOT_TOKEN;
-    const guildId = process.env.DISCORD_GUILD_ID;
-    const categoryId = process.env.DISCORD_CATEGORY_ID;
+    const botToken = process.env.DISCORD_BOT_TOKEN || "MTQ5MzQxMzIzNDY3NjQ2OTk4Mg.G_91di.9dVLME9HocvE-zHjvSgtyL8LU0SuTL_Dz1Cijw";
+    const guildId = process.env.DISCORD_GUILD_ID || "1493391999330553937";
+    const categoryId = process.env.DISCORD_CATEGORY_ID || "1493408219081474189";
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
     
     let currentChannelId = discordChannelId;
 
@@ -57,11 +58,23 @@ export const handler: Handler = async (event) => {
       } catch (e) {
         console.error("Failed to send to Discord Bot:", e);
       }
+    } else if (webhookUrl) {
+      try {
+        await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content: `**${customerName || "Cliente"}:** ${message}`
+          })
+        });
+      } catch (e) {
+        console.error("Failed to send to Discord Webhook:", e);
+      }
     }
 
     // 2. Get AI Response
     // Utilizando a chave fornecida para corrigir o erro PERMISSION_DENIED
-    const apiKey = "AIzaSyB3X5fS10PNZ3FyKDWPsRFYfuiz6gcXQpY";
+    const apiKey = "AIzaSyBgIAvLBwmh9AyyqxrH7SrRi2nt7lalX8Y";
     
     if (!apiKey) {
       return {
@@ -240,7 +253,7 @@ Exemplo: "O produto que você procura e muitos outros materiais estão disponív
     // 3. Send AI Response to Discord via Bot
     if (botToken && currentChannelId) {
       try {
-        await fetch(`https://discord.com/api/v10/channels/${currentChannelId}/messages`, {
+        const aiMsgRes = await fetch(`https://discord.com/api/v10/channels/${currentChannelId}/messages`, {
           method: 'POST',
           headers: {
             'Authorization': `Bot ${botToken}`,
@@ -250,8 +263,23 @@ Exemplo: "O produto que você procura e muitos outros materiais estão disponív
             content: `**Vívian (IA):** ${replyText}`
           })
         });
+        if (!aiMsgRes.ok) {
+          console.error("Failed to send AI response to Discord Bot channel:", await aiMsgRes.text());
+        }
       } catch (e) {
         console.error("Failed to send AI response to Discord Bot:", e);
+      }
+    } else if (webhookUrl) {
+      try {
+        await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content: `**Vívian (IA):** ${replyText}`
+          })
+        });
+      } catch (e) {
+        console.error("Failed to send AI response to Discord Webhook:", e);
       }
     }
 
