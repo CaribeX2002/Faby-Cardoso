@@ -12,8 +12,7 @@ async function startServer() {
 
   app.use(express.json());
 
-  // API routes
-  app.post("/api/chat", async (req, res) => {
+  const chatHandler = async (req: express.Request, res: express.Response) => {
     try {
       const { message, history, customerName, discordChannelId } = req.body;
       
@@ -292,7 +291,11 @@ Exemplo: "O produto que você procura e muitos outros materiais estão disponív
       console.error("Chat error:", error);
       res.status(500).json({ error: "Internal server error" });
     }
-  });
+  };
+
+  // API routes
+  app.post("/api/chat", chatHandler);
+  app.post("/.netlify/functions/chat", chatHandler);
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
