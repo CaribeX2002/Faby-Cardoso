@@ -22,7 +22,7 @@ export const handler: Handler = async (event) => {
       try {
         if (!currentChannelId) {
           const channelName = `chat-${(customerName || "anonimo").toLowerCase().replace(/[^a-z0-9-]/g, '-')}`;
-          const createChannelRes = await fetch(`https://discord.com/api/v10/guilds/${guildId}/channels`, {
+          let createChannelRes = await fetch(`https://discord.com/api/v10/guilds/${guildId}/channels`, {
             method: 'POST',
             headers: {
               'Authorization': `Bot ${botToken}`,
@@ -35,11 +35,27 @@ export const handler: Handler = async (event) => {
             })
           });
 
+          if (!createChannelRes.ok) {
+            const errorText = await createChannelRes.text();
+            console.error("Failed to create Discord channel:", errorText);
+            if (errorText.includes("Maximum number of channels in category reached")) {
+              createChannelRes = await fetch(`https://discord.com/api/v10/guilds/${guildId}/channels`, {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bot ${botToken}`,
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  name: channelName,
+                  type: 0
+                })
+              });
+            }
+          }
+
           if (createChannelRes.ok) {
             const channelData = await createChannelRes.json();
             currentChannelId = channelData.id;
-          } else {
-            console.error("Failed to create Discord channel:", await createChannelRes.text());
           }
         }
 

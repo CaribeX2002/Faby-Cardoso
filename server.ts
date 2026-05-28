@@ -3,8 +3,19 @@ import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import path from "path";
 import dotenv from "dotenv";
+import { Client, GatewayIntentBits } from "discord.js";
 
 dotenv.config({ override: true });
+
+// Initialize Discord bot client so it appears online status
+const discordClient = new Client({ intents: [GatewayIntentBits.Guilds] });
+const botTokenConfig = process.env.DISCORD_BOT_TOKEN;
+if (botTokenConfig) {
+  discordClient.login(botTokenConfig).catch(console.error);
+  discordClient.once('ready', () => {
+    console.log(`Discord bot logged in as ${discordClient.user?.tag} (Online)`);
+  });
+}
 
 async function startServer() {
   const app = express();
@@ -32,7 +43,8 @@ async function startServer() {
             // Create channel if it doesn't exist
             if (!currentChannelId) {
               const channelName = `chat-${(customerName || "anonimo").toLowerCase().replace(/[^a-z0-9-]/g, '-')}`;
-              const createChannelRes = await fetch(`https://discord.com/api/v10/guilds/${guildId}/channels`, {
+              
+              let createChannelRes = await fetch(`https://discord.com/api/v10/guilds/${guildId}/channels`, {
                 method: 'POST',
                 headers: {
                   'Authorization': `Bot ${botToken}`,
@@ -45,12 +57,34 @@ async function startServer() {
                 })
               });
 
+              // Fallback se a categoria já tiver 50 canais (limite do Discord)
+              if (!createChannelRes.ok) {
+                const errorText = await createChannelRes.text();
+                console.error("Failed to create Discord channel (with category):", errorText);
+                
+                if (errorText.includes("Maximum number of channels in category reached")) {
+                   createChannelRes = await fetch(`https://discord.com/api/v10/guilds/${guildId}/channels`, {
+                    method: 'POST',
+                    headers: {
+                      'Authorization': `Bot ${botToken}`,
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      name: channelName,
+                      type: 0 // Text channel, without parent category
+                    })
+                  });
+                }
+              }
+
               if (createChannelRes.ok) {
                 const channelData = await createChannelRes.json();
                 currentChannelId = channelData.id;
               } else {
-                const errorText = await createChannelRes.text();
-                console.error("Failed to create Discord channel:", errorText);
+                 if (!createChannelRes.ok) {
+                    const finalError = await createChannelRes.text().catch(()=>"No text");
+                    console.error("Failed to create Discord channel (fallback):", finalError);
+                 }
               }
             }
 
