@@ -16,6 +16,18 @@ import ComoSerNailDesigner from './pages/blog/ComoSerNailDesigner';
 import DezDicasManicureSucesso from './pages/blog/DezDicasManicureSucesso';
 import ProdutosEssenciaisManicure from './pages/blog/ProdutosEssenciaisManicure';
 import GuiaAlongamentoUnhas from './pages/blog/GuiaAlongamentoUnhas';
+import UnhasPosticasRealistas from './pages/blog/UnhasPosticasRealistas';
+import EsmaltacaoEmGel from './pages/blog/EsmaltacaoEmGel';
+import BiossegurancaManicures from './pages/blog/BiossegurancaManicures';
+import SpaDosPes from './pages/blog/SpaDosPes';
+import FotografiaUnhas from './pages/blog/FotografiaUnhas';
+import InstagramParaManicures from './pages/blog/InstagramParaManicures';
+import DoencasNasUnhas from './pages/blog/DoencasNasUnhas';
+import BlindagemDeUnhas from './pages/blog/BlindagemDeUnhas';
+import AtendimentoAoCliente from './pages/blog/AtendimentoAoCliente';
+import ErgonomiaManicure from './pages/blog/ErgonomiaManicure';
+import CursoManicureGratis from './pages/blog/CursoManicureGratis';
+import CursoFrancesinhaGratis from './pages/blog/CursoFrancesinhaGratis';
 import BlogIndex from './pages/blog/BlogIndex';
 import Store from './pages/Store';
 
@@ -51,6 +63,18 @@ export default function App() {
           <Route path="/10-dicas-manicure-sucesso" element={<DezDicasManicureSucesso />} />
           <Route path="/produtos-essenciais-manicure" element={<ProdutosEssenciaisManicure />} />
           <Route path="/guia-alongamento-unhas" element={<GuiaAlongamentoUnhas />} />
+          <Route path="/unhas-posticas-realistas" element={<UnhasPosticasRealistas />} />
+          <Route path="/esmaltacao-em-gel" element={<EsmaltacaoEmGel />} />
+          <Route path="/biosseguranca" element={<BiossegurancaManicures />} />
+          <Route path="/spa-dos-pes" element={<SpaDosPes />} />
+          <Route path="/fotografia-de-unhas" element={<FotografiaUnhas />} />
+          <Route path="/instagram-para-manicures" element={<InstagramParaManicures />} />
+          <Route path="/doencas-nas-unhas" element={<DoencasNasUnhas />} />
+          <Route path="/blindagem-de-unhas" element={<BlindagemDeUnhas />} />
+          <Route path="/atendimento-ao-cliente" element={<AtendimentoAoCliente />} />
+          <Route path="/ergonomia-manicure" element={<ErgonomiaManicure />} />
+          <Route path="/curso-manicure-gratis" element={<CursoManicureGratis />} />
+          <Route path="/curso-francesinha-gratis" element={<CursoFrancesinhaGratis />} />
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/loja" element={<Store />} />
         </Routes>

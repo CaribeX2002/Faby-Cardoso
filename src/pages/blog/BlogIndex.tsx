@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { BookOpen, TrendingUp, Calculator, Palette, Scissors, Sparkles, Navigation, Lightbulb, Box, Layers, PlayCircle, ArrowRight } from 'lucide-react';
+import { BookOpen, TrendingUp, Calculator, Palette, Scissors, Sparkles, Navigation, Lightbulb, Box, Layers, PlayCircle, ArrowRight, Star, Shield, Droplets, Camera, Instagram, AlertCircle, ShieldCheck, HeartHandshake, Activity } from 'lucide-react';
 import { SEO } from '../../components/SEO';
 
 export default function BlogIndex() {
@@ -82,6 +82,90 @@ export default function BlogIndex() {
       description: "Mais de 40 fotos exclusivas com os melhores trabalhos para servir de molde.",
       icon: <PlayCircle className="w-6 h-6 text-secondary" />,
       category: "Inspiração"
+    },
+    {
+      path: "/unhas-posticas-realistas",
+      title: "Unhas Postiças Realistas",
+      description: "O segredo para uma unha postiça natural, duradoura e impecável.",
+      icon: <Star className="w-6 h-6 text-secondary" />,
+      category: "Técnica"
+    },
+    {
+      path: "/esmaltacao-em-gel",
+      title: "Esmaltação em Gel",
+      description: "Os passos para uma esmaltação prolongada sem descascar.",
+      icon: <Palette className="w-6 h-6 text-secondary" />,
+      category: "Técnica"
+    },
+    {
+      path: "/biosseguranca",
+      title: "Biossegurança de Manicure",
+      description: "Tudo o que deve saber sobre estufas, autoclaves e proteção.",
+      icon: <Shield className="w-6 h-6 text-secondary" />,
+      category: "Segurança"
+    },
+    {
+      path: "/spa-dos-pes",
+      title: "Spa dos Pés Lucrativo",
+      description: "Um serviço simples que aumenta consideravelmente a sua renda.",
+      icon: <Droplets className="w-6 h-6 text-secondary" />,
+      category: "Serviços"
+    },
+    {
+      path: "/fotografia-de-unhas",
+      title: "Fotografia com Celular",
+      description: "Saiba tirar as melhores fotos das unhas terminadas para postar no Instagram.",
+      icon: <Camera className="w-6 h-6 text-secondary" />,
+      category: "Marketing"
+    },
+    {
+      path: "/instagram-para-manicures",
+      title: "Instagram Bombado",
+      description: "Aprenda as dicas matadoras para agendar clientes através do Instagram Reels.",
+      icon: <Instagram className="w-6 h-6 text-secondary" />,
+      category: "Redes Sociais"
+    },
+    {
+      path: "/doencas-nas-unhas",
+      title: "Doenças nas Unhas",
+      description: "Como a manicure identifica fungos perigosos na mesa e o que fazer.",
+      icon: <AlertCircle className="w-6 h-6 text-secondary" />,
+      category: "Saúde"
+    },
+    {
+      path: "/blindagem-de-unhas",
+      title: "Blindagem ou Banho de Gel",
+      description: "Guia prático da manutenção preventiva para as unhas mais fracas.",
+      icon: <ShieldCheck className="w-6 h-6 text-secondary" />,
+      category: "Técnica"
+    },
+    {
+      path: "/atendimento-ao-cliente",
+      title: "Atendimento Encantador",
+      description: "Uma vez nela, nunca abandona: como fidelizar clientes logo no primeiro contato.",
+      icon: <HeartHandshake className="w-6 h-6 text-secondary" />,
+      category: "Negócios"
+    },
+    {
+      path: "/ergonomia-manicure",
+      title: "Saúde da Cadeira",
+      description: "Se recuse a ter dores nos braços e lombares, previna com a ergonomia.",
+      icon: <Activity className="w-6 h-6 text-secondary" />,
+      category: "Saúde"
+    },
+    {
+      path: "/curso-manicure-gratis",
+      title: "Curso Manicure Grátis",
+      description: "Assista agora a uma aula completa e gratuita com a Faby Cardoso.",
+      icon: <PlayCircle className="w-6 h-6 text-secondary" />,
+      category: "Aulas"
+    },
+    {
+      path: "/curso-francesinha-gratis",
+      title: "Curso Francesinha Grátis",
+      description: "Aprenda a fazer a francesinha perfeita com esta videoaula 100% gratuita.",
+      icon: <PlayCircle className="w-6 h-6 text-secondary" />,
+      category: "Aulas"
     }
   ];
 
