@@ -10,9 +10,9 @@ export const handler: Handler = async (event) => {
     const body = event.body ? JSON.parse(event.body) : {};
     const { message, history, customerName, discordChannelId } = body;
     
-    const botToken = process.env.DISCORD_BOT_TOKEN || "MTQ5MzQxMzIzNDY3NjQ2OTk4Mg.G_91di.9dVLME9HocvE-zHjvSgtyL8LU0SuTL_Dz1Cijw";
-    const guildId = process.env.DISCORD_GUILD_ID || "1493391999330553937";
-    const categoryId = process.env.DISCORD_CATEGORY_ID || "1493408219081474189";
+    const botToken = process.env.DISCORD_BOT_TOKEN;
+    const guildId = process.env.DISCORD_GUILD_ID;
+    const categoryId = process.env.DISCORD_CATEGORY_ID;
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
     
     let currentChannelId = discordChannelId;
@@ -73,10 +73,9 @@ export const handler: Handler = async (event) => {
     }
 
     // 2. Get AI Response
-    // Utilizando a chave fornecida para corrigir o erro PERMISSION_DENIED
-    const apiKey = "AIzaSyBgIAvLBwmh9AyyqxrH7SrRi2nt7lalX8Y";
+    const apiKey = process.env.GEMINI_API_KEY;
     
-    if (!apiKey) {
+    if (!apiKey || apiKey === "MY_GEMINI_API_KEY") {
       return {
         statusCode: 200,
         body: JSON.stringify({ 
