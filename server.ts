@@ -3,18 +3,133 @@ import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import path from "path";
 import dotenv from "dotenv";
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client, GatewayIntentBits, ChannelType } from "discord.js";
 
 dotenv.config({ override: true });
 
 // Initialize Discord bot client so it appears online status
-const discordClient = new Client({ intents: [GatewayIntentBits.Guilds] });
+const discordClient = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 const botTokenConfig = process.env.DISCORD_BOT_TOKEN;
+
+async function cleanOldDiscordChannels() {
+  const guildId = process.env.DISCORD_GUILD_ID;
+  if (!guildId) return;
+
+  try {
+    const guild = await discordClient.guilds.fetch(guildId);
+    if (!guild) return;
+
+    const channels = await guild.channels.fetch();
+    const now = Date.now();
+    const twoDaysMs = 2 * 24 * 60 * 60 * 1000;
+
+    for (const [channelId, channel] of channels) {
+      if (!channel) continue;
+      // Só exclui canais de texto que começam com "chat-"
+      if (channel.type === ChannelType.GuildText && channel.name.startsWith('chat-')) {
+        let lastMessageDate = channel.createdAt;
+
+        try {
+          // Busca a última mensagem para ver se foi inativo nos últimos 2 dias
+          // Como as coleções podem não estar cacheadas ou ter mensagens antigas, 
+          // usaremos fetch limit 1
+          const messages = await (channel as any).messages.fetch({ limit: 1 });
+          const lastMsg = messages.first();
+          if (lastMsg) {
+            lastMessageDate = lastMsg.createdAt;
+          }
+        } catch(e) {}
+
+        const ageMs = now - (lastMessageDate?.getTime() || 0);
+        if (ageMs > twoDaysMs) {
+          console.log(`Deletando canal inativo > 2 dias: ${channel.name}`);
+          await channel.delete('Canal inativo por mais de 2 dias');
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Erro ao limpar canais antigos:", error);
+  }
+}
+
 if (botTokenConfig) {
   discordClient.login(botTokenConfig).catch(console.error);
   discordClient.once('ready', () => {
     console.log(`Discord bot logged in as ${discordClient.user?.tag} (Online)`);
+    // Limpa imediatamente ao ligar
+    cleanOldDiscordChannels();
+    // E tenta limpar a cada 12 horas
+    setInterval(cleanOldDiscordChannels, 12 * 60 * 60 * 1000);
   });
+}
+
+// Helper function to create channels managing category maximum size
+async function createDiscordChannel(guildId: string, categoryIdPrefix: string | undefined, channelName: string) {
+  try {
+    const guild = await discordClient.guilds.fetch(guildId);
+    if (!guild) return null;
+
+    // Try default category first
+    if (categoryIdPrefix) {
+      try {
+        const channel = await guild.channels.create({
+          name: channelName,
+          type: ChannelType.GuildText,
+          parent: categoryIdPrefix
+        });
+        return channel.id;
+      } catch (err: any) {
+        // If error is not related to MAX CHANNELS, throw it
+        if (err.code !== 50035 && !err.message?.includes('Maximum number of channels in category reached')) {
+           throw err;
+        }
+      }
+    }
+
+    // Limit reached or no category id. Handle overflow categories.
+    const allChannels = await guild.channels.fetch();
+    
+    // Count channels per category manually since cache can be unreliable
+    const categoryChannelCounts = new Map<string, number>();
+    for (const [id, c] of allChannels) {
+      if (c && c.parentId) {
+        categoryChannelCounts.set(c.parentId, (categoryChannelCounts.get(c.parentId) || 0) + 1);
+      }
+    }
+
+    let overflowCatId: string | undefined = undefined;
+    let overflowCatCount = 0;
+
+    for (const [id, c] of allChannels) {
+      if (c && c.type === ChannelType.GuildCategory && c.name.startsWith('Chats Adicionais')) {
+        overflowCatCount++;
+        const count = categoryChannelCounts.get(id) || 0;
+        if (count < 50 && !overflowCatId) {
+          overflowCatId = id;
+        }
+      }
+    }
+
+    // Se não encontrou uma categoria livre, cria uma nova
+    if (!overflowCatId) {
+      const novaCat = await guild.channels.create({
+        name: `Chats Adicionais ${overflowCatCount + 1}`,
+        type: ChannelType.GuildCategory
+      });
+      overflowCatId = novaCat.id;
+    }
+
+    const channel = await guild.channels.create({
+      name: channelName,
+      type: ChannelType.GuildText,
+      parent: overflowCatId
+    });
+    
+    return channel.id;
+  } catch (error) {
+    console.error("Erro ao criar canal com fallback:", error);
+    return null;
+  }
 }
 
 async function startServer() {
@@ -44,48 +159,7 @@ async function startServer() {
             if (!currentChannelId) {
               const channelName = `chat-${(customerName || "anonimo").toLowerCase().replace(/[^a-z0-9-]/g, '-')}`;
               
-              let createChannelRes = await fetch(`https://discord.com/api/v10/guilds/${guildId}/channels`, {
-                method: 'POST',
-                headers: {
-                  'Authorization': `Bot ${botToken}`,
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  name: channelName,
-                  type: 0, // Text channel
-                  parent_id: categoryId || undefined
-                })
-              });
-
-              // Fallback se a categoria já tiver 50 canais (limite do Discord)
-              if (!createChannelRes.ok) {
-                const errorText = await createChannelRes.text();
-                console.error("Failed to create Discord channel (with category):", errorText);
-                
-                if (errorText.includes("Maximum number of channels in category reached")) {
-                   createChannelRes = await fetch(`https://discord.com/api/v10/guilds/${guildId}/channels`, {
-                    method: 'POST',
-                    headers: {
-                      'Authorization': `Bot ${botToken}`,
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                      name: channelName,
-                      type: 0 // Text channel, without parent category
-                    })
-                  });
-                }
-              }
-
-              if (createChannelRes.ok) {
-                const channelData = await createChannelRes.json();
-                currentChannelId = channelData.id;
-              } else {
-                 if (!createChannelRes.ok) {
-                    const finalError = await createChannelRes.text().catch(()=>"No text");
-                    console.error("Failed to create Discord channel (fallback):", finalError);
-                 }
-              }
+              currentChannelId = await createDiscordChannel(guildId, categoryId, channelName) || undefined;
             }
 
             // Send message to the channel
